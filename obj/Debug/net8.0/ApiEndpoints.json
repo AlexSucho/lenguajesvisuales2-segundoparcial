@@ -84,9 +84,56 @@
   },
   {
     "ContainingType": "GestorClientesApi.Controllers.ClientesController",
+    "Method": "Listar",
+    "RelativePath": "api/Clientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestorClientesApi.Controllers.ClientesController",
     "Method": "ObtenerPorCI",
     "RelativePath": "api/Clientes/{ci}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ci",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestorClientesApi.Controllers.ClientesController",
+    "Method": "Actualizar",
+    "RelativePath": "api/Clientes/{ci}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ci",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "GestorClientesApi.Models.Dtos.ClienteUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestorClientesApi.Controllers.ClientesController",
+    "Method": "Eliminar",
+    "RelativePath": "api/Clientes/{ci}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [

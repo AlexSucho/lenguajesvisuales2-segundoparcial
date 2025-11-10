@@ -148,10 +148,69 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Clientes/{ci}": {
       "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "parameters": [
+          {
+            "name": "ci",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clientes"
+        ],
+        "parameters": [
+          {
+            "name": "ci",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
         "tags": [
           "Clientes"
         ],
@@ -283,6 +342,44 @@
   },
   "components": {
     "schemas": {
+      "ClienteUpdateDto": {
+        "required": [
+          "direccion",
+          "nombres",
+          "telefono"
+        ],
+        "type": "object",
+        "properties": {
+          "nombres": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "direccion": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "telefono": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "fotoCasa1Url": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotoCasa2Url": {
+            "type": "string",
+            "nullable": true
+          },
+          "fotoCasa3Url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WeatherForecast": {
         "type": "object",
         "properties": {

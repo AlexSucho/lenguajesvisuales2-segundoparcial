@@ -173,3 +173,4 @@ C:\Users\Usuario 2\source\repos\GestorClientesApi\GestorClientesApi\obj\Debug\ne
 C:\Users\Usuario 2\source\repos\GestorClientesApi\GestorClientesApi\obj\Debug\net8.0\GestorClientesApi.pdb
 C:\Users\Usuario 2\source\repos\GestorClientesApi\GestorClientesApi\obj\Debug\net8.0\GestorClientesApi.genruntimeconfig.cache
 C:\Users\Usuario 2\source\repos\GestorClientesApi\GestorClientesApi\obj\Debug\net8.0\ref\GestorClientesApi.dll
+C:\Users\Usuario 2\source\repos\GestorClientesApi\GestorClientesApi\obj\Debug\net8.0\GestorClientesApi.sourcelink.json

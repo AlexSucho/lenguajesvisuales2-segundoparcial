@@ -19,11 +19,13 @@ namespace GestorClientesApi.Controllers
             _env = env;
         }
 
+        // =======================
+        // POST: /api/Clientes
+        // =======================
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> Crear([FromForm] ClienteCreateDto dto)
         {
-            // Validaciones mínimas del enunciado
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -61,6 +63,9 @@ namespace GestorClientesApi.Controllers
             return CreatedAtAction(nameof(ObtenerPorCI), new { ci = cliente.CI }, cliente);
         }
 
+        // =======================
+        // GET: /api/Clientes/{ci}
+        // =======================
         [HttpGet("{ci}")]
         public async Task<IActionResult> ObtenerPorCI(string ci)
         {
@@ -68,6 +73,65 @@ namespace GestorClientesApi.Controllers
             return cliente is null ? NotFound() : Ok(cliente);
         }
 
+        // =======================
+        // (Opcional) GET: /api/Clientes
+        // =======================
+        [HttpGet]
+        public async Task<IActionResult> Listar()
+        {
+            var clientes = await _db.Clientes
+                .OrderBy(c => c.Nombres)
+                .ToListAsync();
+
+            return Ok(clientes);
+        }
+
+        // =======================
+        // PUT: /api/Clientes/{ci}
+        // =======================
+        [HttpPut("{ci}")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> Actualizar(string ci, [FromBody] ClienteUpdateDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var cliente = await _db.Clientes.FirstOrDefaultAsync(c => c.CI == ci);
+            if (cliente is null)
+                return NotFound(new { message = $"No existe el cliente con CI {ci}" });
+
+            // Mapear cambios
+            cliente.Nombres = dto.Nombres;
+            cliente.Direccion = dto.Direccion;
+            cliente.Telefono = dto.Telefono;
+
+            // Si decidieras permitir actualizar URLs:
+            if (dto.FotoCasa1Url != null) cliente.FotoCasa1Url = dto.FotoCasa1Url;
+            if (dto.FotoCasa2Url != null) cliente.FotoCasa2Url = dto.FotoCasa2Url;
+            if (dto.FotoCasa3Url != null) cliente.FotoCasa3Url = dto.FotoCasa3Url;
+
+            await _db.SaveChangesAsync();
+            return Ok(cliente);
+        }
+
+        // =======================
+        // DELETE: /api/Clientes/{ci}
+        // =======================
+        [HttpDelete("{ci}")]
+        public async Task<IActionResult> Eliminar(string ci)
+        {
+            var cliente = await _db.Clientes.FirstOrDefaultAsync(c => c.CI == ci);
+            if (cliente is null)
+                return NotFound(new { message = $"No existe el cliente con CI {ci}" });
+
+            _db.Clientes.Remove(cliente);
+            await _db.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // =======================
+        // Helpers
+        // =======================
         private static async Task<string?> GuardarArchivo(IFormFile? file, string basePath, string nombreBase)
         {
             if (file is null || file.Length == 0) return null;
